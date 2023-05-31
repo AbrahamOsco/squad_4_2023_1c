@@ -17,3 +17,6 @@ class AccountRepository:
 
     def find_all(self):
         return self.db.query(AccountDB).all()
+
+    def find_by_cbu(self, cbu: int):
+        return self.db.query(AccountDB).get(cbu)

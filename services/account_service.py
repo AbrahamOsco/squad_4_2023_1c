@@ -16,3 +16,9 @@ class AccountService:
 
     def get_accounts(self):
         return self.account_repository.find_all()
+
+    def get_account(self, cbu: int):
+        db_account = self.account_repository.find_by_cbu(cbu=cbu)
+        if db_account is None:
+            raise HTTPException(status_code=404, detail="User not found")
+        return db_account

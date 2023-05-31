@@ -18,3 +18,9 @@ def create_account(account: AccountCreate, db: Session = Depends(get_db)):
 def get_accounts(db: Session = Depends(get_db)):
     account_service: AccountService = AccountService(db)
     return account_service.get_accounts()
+
+
+@router.get("/accounts/{cbu}", response_model=Account)
+def get_account(cbu: int ,db: Session = Depends(get_db)):
+    account_service: AccountService = AccountService(db)
+    return account_service.get_account(cbu=cbu)
