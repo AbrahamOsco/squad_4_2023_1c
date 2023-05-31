@@ -13,3 +13,6 @@ class AccountService:
         if account.balance < 0:
             raise HTTPException(status_code=400, detail="Cannot create negative balance account")
         return self.account_repository.create_account(account=account)
+
+    def get_accounts(self):
+        return self.account_repository.find_all()

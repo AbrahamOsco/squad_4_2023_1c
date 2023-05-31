@@ -12,3 +12,9 @@ router = APIRouter()
 def create_account(account: AccountCreate, db: Session = Depends(get_db)):
     account_service: AccountService = AccountService(db)
     return account_service.create_account(account=account)
+
+
+@router.get("/accounts", response_model=list[Account])
+def get_accounts(db: Session = Depends(get_db)):
+    account_service: AccountService = AccountService(db)
+    return account_service.get_accounts()

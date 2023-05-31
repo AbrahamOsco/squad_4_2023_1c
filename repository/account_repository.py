@@ -14,3 +14,6 @@ class AccountRepository:
         self.db.commit()
         self.db.refresh(db_account)
         return db_account
+
+    def find_all(self):
+        return self.db.query(AccountDB).all()
