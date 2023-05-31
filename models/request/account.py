@@ -1,9 +1,12 @@
 from pydantic import BaseModel
 
 
-class Account(BaseModel):
-    cbu: int
+class AccountCreate(BaseModel):
     balance: int
+
+
+class Account(AccountCreate):
+    cbu: int
 
     class Config:
         orm_mode = True
