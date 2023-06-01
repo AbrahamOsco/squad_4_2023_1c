@@ -17,8 +17,17 @@ class AccountService:
     def get_accounts(self):
         return self.account_repository.find_all()
 
-    def get_account(self, cbu: int):
-        db_account = self.account_repository.find_by_cbu(cbu=cbu)
+    def find_by_id(self, cbu: int):
+        db_account = self.account_repository.find_by_id(cbu=cbu)
         if db_account is None:
             raise HTTPException(status_code=404, detail="User not found")
         return db_account
+
+    def update_account(self, cbu: int, account: AccountCreate):
+        db_account = self.account_repository.find_by_id(cbu=cbu)
+        if db_account is None:
+            raise HTTPException(status_code=404, detail="Account not found")
+        if account.balance < 0:
+            raise HTTPException(status_code=400, detail="Cannot update account with negative balance")
+        db_account.balance = account.balance
+        return self.account_repository.save(db_account)

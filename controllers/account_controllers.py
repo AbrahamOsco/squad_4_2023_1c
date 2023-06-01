@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
 from database.connection import get_db
@@ -21,6 +21,13 @@ def get_accounts(db: Session = Depends(get_db)):
 
 
 @router.get("/accounts/{cbu}", response_model=Account)
-def get_account(cbu: int ,db: Session = Depends(get_db)):
+def get_account(cbu: int, db: Session = Depends(get_db)):
     account_service: AccountService = AccountService(db)
-    return account_service.get_account(cbu=cbu)
+    return account_service.find_by_id(cbu=cbu)
+
+
+@router.put("/accounts/{cbu}")
+def update_account(cbu: int, account: AccountCreate, db: Session = Depends(get_db)):
+    account_service = AccountService(db)
+    return account_service.update_account(cbu=cbu, account=account)
+
