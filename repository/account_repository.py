@@ -26,3 +26,7 @@ class AccountRepository:
         self.db.commit()
         self.db.refresh(db_account)
         return db_account
+
+    def delete_by_id(self, db_account):
+        self.db.delete(db_account)
+        self.db.commit()

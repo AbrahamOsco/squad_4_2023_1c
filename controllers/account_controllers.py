@@ -26,8 +26,14 @@ def get_account(cbu: int, db: Session = Depends(get_db)):
     return account_service.find_by_id(cbu=cbu)
 
 
-@router.put("/accounts/{cbu}")
+@router.put("/accounts/{cbu}", response_model=Account)
 def update_account(cbu: int, account: AccountCreate, db: Session = Depends(get_db)):
-    account_service = AccountService(db)
+    account_service: AccountService = AccountService(db)
     return account_service.update_account(cbu=cbu, account=account)
+
+
+@router.delete("/accounts/{cbu}")
+def delete_account(cbu: int, db: Session = Depends(get_db)):
+    account_service: AccountService = AccountService(db)
+    account_service.delete_by_id(cbu=cbu)
 
