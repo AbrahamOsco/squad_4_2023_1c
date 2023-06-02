@@ -15,6 +15,18 @@ def create_account(account: AccountCreate, db: Session = Depends(get_db)):
 
 
 @router.get("/accounts", response_model=list[Account])
-def get_accounts(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+def get_accounts(db: Session = Depends(get_db)):
     account_service: AccountService = AccountService(db)
-    return account_service.get_accounts(skip=skip, limit=limit)
+    return account_service.get_accounts()
+
+
+@router.get("/accounts/{cbu}", response_model=Account)
+def get_account(cbu: int, db: Session = Depends(get_db)):
+    account_service: AccountService = AccountService(db)
+    return account_service.find_by_id(cbu=cbu)
+
+
+@router.put("/accounts/{cbu}", response_model=Account)
+def update_account(cbu: int, account: AccountCreate, db: Session = Depends(get_db)):
+    account_service: AccountService = AccountService(db)
+    return account_service.update_account(cbu=cbu, account=account)
