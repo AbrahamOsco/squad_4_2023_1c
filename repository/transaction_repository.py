@@ -9,3 +9,6 @@ class TransactionRepository:
 
     def find_all(self):
         return self.db.query(Transaction).all()
+
+    def find_by_id(self, transaction_id: int):
+        return self.db.query(Transaction).get(transaction_id)
