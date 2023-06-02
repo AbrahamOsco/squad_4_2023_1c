@@ -33,7 +33,7 @@ def update_account(cbu: int, account: AccountCreate, db: Session = Depends(get_d
     return account_service.update_account(cbu=cbu, account=account)
 
 
-@router.post("/accounts/{cbu}/transactions")
+@router.post("/accounts/{cbu}/transactions", response_model=Transaction)
 def create_transaction_for_account(cbu: int, transaction: TransactionCreate, db: Session = Depends(get_db)):
     account_service: AccountService = AccountService(db)
     return account_service.create_account_transaction(transaction=transaction, cbu=cbu)
