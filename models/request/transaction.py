@@ -9,15 +9,15 @@ class TransactionType(str, Enum):
 
 
 class TransactionBase(BaseModel):
-    amount: int
-    type: TransactionType
+    amount: str
+    transaction_type: TransactionType
 
 
 class TransactionCreate(TransactionBase):
     pass
 
 
-class Transaction(TransactionCreate):
+class Transaction(TransactionBase):
     transaction_id: int
     transaction_cbu: int
 

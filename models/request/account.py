@@ -11,9 +11,10 @@ class AccountCreate(AccountBase):
     pass
 
 
-class Account(AccountCreate):
+class Account(AccountBase):
     cbu: int
     transactions: list[Transaction] = []
 
     class Config:
         orm_mode = True
+        
