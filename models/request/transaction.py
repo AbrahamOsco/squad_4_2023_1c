@@ -5,7 +5,7 @@ from pydantic import BaseModel
 
 class TransactionBase(BaseModel):
     amount: int
-    transaction_type: str
+    type: str
 
 
 class TransactionCreate(TransactionBase):
@@ -13,8 +13,8 @@ class TransactionCreate(TransactionBase):
 
 
 class Transaction(TransactionBase):
-    transaction_id: int
-    owner_id: int
+    id: int
+    cbu: int
 
     class Config:
         orm_mode = True

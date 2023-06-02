@@ -40,5 +40,5 @@ class AccountService:
 
     def create_account_transaction(self, transaction: TransactionCreate, cbu: int):
         db_transaction: Transaction = Transaction(amount=transaction.amount,
-                                                  transaction_type=transaction.transaction_type, owner_id=cbu)
+                                                  type=transaction.type, cbu=cbu)
         return self.account_repository.create_account_transaction(db_transaction=db_transaction)
