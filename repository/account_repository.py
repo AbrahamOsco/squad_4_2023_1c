@@ -10,3 +10,9 @@ class AccountRepository:
 
     def find_all(self, skip: int = 0, limit: int = 100):
         return self.db.query(Account).offset(skip).limit(limit).all()
+
+    def save(self, db_account: Account):
+        self.db.add(db_account)
+        self.db.commit()
+        self.db.refresh(db_account)
+        return db_account
