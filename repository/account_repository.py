@@ -19,3 +19,9 @@ class AccountRepository:
 
     def find_by_id(self, cbu: int):
         return self.db.query(Account).get(cbu)
+
+    def create_account_transaction(self, db_transaction: Transaction):
+        self.db.add(db_transaction)
+        self.db.commit()
+        self.db.refresh(db_transaction)
+        return db_transaction

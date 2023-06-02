@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 
 from database.connection import get_db
 from models.request.account import Account, AccountCreate
+from models.request.transaction import Transaction, TransactionCreate
 from services.account_service import AccountService
 
 router = APIRouter()
@@ -30,3 +31,9 @@ def get_account(cbu: int, db: Session = Depends(get_db)):
 def update_account(cbu: int, account: AccountCreate, db: Session = Depends(get_db)):
     account_service: AccountService = AccountService(db)
     return account_service.update_account(cbu=cbu, account=account)
+
+
+@router.post("/accounts/{cbu}/transactions")
+def create_transaction_for_account(cbu: int, transaction: TransactionCreate, db: Session = Depends(get_db)):
+    account_service: AccountService = AccountService(db)
+    return account_service.create_account_transaction(transaction=transaction, cbu=cbu)
