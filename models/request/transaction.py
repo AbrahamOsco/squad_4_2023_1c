@@ -3,9 +3,14 @@ from enum import Enum
 from pydantic import BaseModel
 
 
+class TransactionType(str, Enum):
+    withdraw = "withdraw"
+    deposit = "deposit"
+
+
 class TransactionBase(BaseModel):
     amount: int
-    type: str
+    type: TransactionType
 
 
 class TransactionCreate(TransactionBase):
