@@ -11,7 +11,7 @@ class AccountRepository:
     def find_all(self):
         return self.db.query(Account).all()
 
-    def save(self, db_account: Account):
+    def save_account(self, db_account: Account):
         self.db.add(db_account)
         self.db.commit()
         self.db.refresh(db_account)
@@ -20,7 +20,7 @@ class AccountRepository:
     def find_by_id(self, cbu: int):
         return self.db.query(Account).get(cbu)
 
-    def create_account_transaction(self, db_transaction: Transaction):
+    def save_transaction(self, db_transaction: Transaction):
         self.db.add(db_transaction)
         self.db.commit()
         self.db.refresh(db_transaction)

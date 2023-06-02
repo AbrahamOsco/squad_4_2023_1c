@@ -17,7 +17,7 @@ class AccountService:
         if account.balance < 0:
             raise HTTPException(status_code=400, detail="Cannot create negative balance account")
         db_account: Account = Account(balance=account.balance)
-        return self.account_repository.save(db_account=db_account)
+        return self.account_repository.save_account(db_account=db_account)
 
     def get_accounts(self):
         account = self.account_repository.find_all()
@@ -36,7 +36,7 @@ class AccountService:
         if account.balance < 0:
             raise HTTPException(status_code=400, detail="Cannot update account with negative balance")
         db_account.balance = account.balance
-        return self.account_repository.save(db_account)
+        return self.account_repository.save_account(db_account=db_account)
 
     def create_account_transaction(self, transaction: TransactionCreate, cbu: int):
         if transaction.type == TransactionType.withdraw:
@@ -46,7 +46,7 @@ class AccountService:
         else:
             raise HTTPException(status_code=400, detail="Invalid transaction type")
         db_transaction: Transaction = Transaction(amount=transaction.amount, type=transaction.type, cbu=cbu)
-        return self.account_repository.create_account_transaction(db_transaction=db_transaction)
+        return self.account_repository.save_transaction(db_transaction=db_transaction)
 
     def withdraw(self, cbu: int, amount: int):
         db_account: Account = self.account_repository.find_by_id(cbu=cbu)
@@ -59,10 +59,9 @@ class AccountService:
         if db_account.balance < amount:
             raise HTTPException(status_code=400, detail="Insufficient funds")
         db_account.balance = db_account.balance - amount
-        self.account_repository.save(db_account)
+        self.account_repository.save_account(db_account)
 
     def deposit(self, cbu: int, amount: int):
-        extra = 0
         if amount == 0:
             raise HTTPException(status_code=400, detail="Cannot deposit null amounts")
         if amount < 0:
@@ -74,4 +73,4 @@ class AccountService:
         if db_account is None:
             raise HTTPException(status_code=404, detail="Account not found")
         db_account.balance = db_account.balance + amount
-        self.account_repository.save(db_account)
+        self.account_repository.save_account(db_account)
