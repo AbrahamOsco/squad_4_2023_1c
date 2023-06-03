@@ -12,3 +12,6 @@ class TransactionRepository:
 
     def find_by_id(self, transaction_id: int):
         return self.db.query(Transaction).get(transaction_id)
+
+    def find_by_cbu(self, cbu: int):
+        return self.db.query(Transaction).filter_by(cbu=cbu).all()

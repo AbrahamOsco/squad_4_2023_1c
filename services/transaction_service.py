@@ -16,5 +16,9 @@ class TransactionService:
     def find_by_id(self, transaction_id: int):
         db_transaction: Transaction = self.transaction_repository.find_by_id(transaction_id=transaction_id)
         if db_transaction is None:
-            raise HTTPException(status_code=404, detail="User not found")
+            raise HTTPException(status_code=404, detail="Transaction not found")
         return db_transaction
+
+    def find_by_cbu(self, cbu: int):
+        transactions = self.transaction_repository.find_by_cbu(cbu=cbu)
+        return transactions
