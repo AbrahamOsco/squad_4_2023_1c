@@ -10,3 +10,9 @@ class ProductRepository:
     def get_products(self):
         return self.db.query(Product).all()
 
+    def save(self, db_product: Product):
+        self.db.add(db_product)
+        self.db.commit()
+        self.db.refresh(db_product)
+        return db_product
+
