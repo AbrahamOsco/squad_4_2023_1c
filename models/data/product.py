@@ -1,6 +1,11 @@
-from models.request.product import Product
+from sqlalchemy import Column, Integer, String
 
-products = [
-    Product(id=1, name="Siu Guarani", version="1.0"),
-    Product(id=2, name="Siu Guarani", version="2.0"),
-]
+from database.connection import Base
+
+
+class Product(Base):
+    __tablename__ = "products"
+
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String)
+    version = Column(String)
