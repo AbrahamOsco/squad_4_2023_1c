@@ -12,3 +12,9 @@ router = APIRouter()
 def create_ticket(product_id: int, client_id, ticket: TicketCreate, db: Session = Depends(get_db)):
     ticket_service: TicketService = TicketService(db)
     return ticket_service.create_ticket(product_id=product_id, client_id=client_id, ticket=ticket)
+
+
+@router.get("/tickets", response_model=list[Ticket])
+def get_tickets(db: Session = Depends(get_db)):
+    ticket_service: TicketService = TicketService(db)
+    return ticket_service.get_tickets()

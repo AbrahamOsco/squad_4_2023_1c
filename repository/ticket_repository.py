@@ -12,3 +12,6 @@ class TicketRepository:
         self.db.commit()
         self.db.refresh(db_ticket)
         return db_ticket
+
+    def find_all(self):
+        return self.db.query(Ticket).all()
