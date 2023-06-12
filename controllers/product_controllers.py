@@ -1,20 +1,14 @@
-from fastapi import APIRouter, Depends
-from sqlalchemy.orm import Session
-
-from database.connection import get_db
-from models.request.product import Product, ProductCreate
-from services.product_service import ProductService
+from fastapi import APIRouter
+from models.request.product import Product
 
 router = APIRouter()
 
-
-@router.post("/products", response_model=Product)
-def create_product(product: ProductCreate, db: Session = Depends(get_db)):
-    product_service: ProductService = ProductService(db)
-    return product_service.create_product(product=product)
+products = [
+    Product(id=1, name="Siu Guarani", version="1.0"),
+    Product(id=2, name="Siu Guarani", version="2.0"),
+]
 
 
 @router.get("/products", response_model=list[Product])
-def get_products(db: Session = Depends(get_db)):
-    product_service: ProductService = ProductService(db)
-    return product_service.get_products()
+def get_products():
+    return products
