@@ -9,4 +9,5 @@ class Ticket(Base):
     id = Column(Integer, primary_key=True, index=True)
     product_id = Column(Integer)
     client_id = Column(Integer)
+    responsible_id = Column(Integer, nullable=True)
     title = Column(String)

@@ -13,6 +13,7 @@ class Ticket(TicketBase):
     id: int
     product_id: int
     client_id: int
+    responsible_id: int | None = None
 
     class Config:
         orm_mode = True
