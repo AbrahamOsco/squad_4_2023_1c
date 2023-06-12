@@ -8,7 +8,10 @@ from services.account_service import AccountService
 
 router = APIRouter()
 
-
+# Se utiliza el decorador Depends para inyectar uan dependencia ne la funcion
+# create_account le pasamos la funcion get_db nos devuelve uan instancia del objeto
+# de la sesion de la base de datos.
+# Metodo post, URL y lo que devuelve el tipo de daot que devuelve.
 @router.post("/accounts", response_model=Account)
 def create_account(account: AccountCreate, db: Session = Depends(get_db)):
     account_service: AccountService = AccountService(db)

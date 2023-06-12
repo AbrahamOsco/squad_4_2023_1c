@@ -9,12 +9,12 @@ engine = create_engine(
 )
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-
-Base = declarative_base()
-
+#
+Base = declarative_base() #Esto es una clase Base no un objeto.
 
 def get_db():
-    db = SessionLocal()
+
+    db = SessionLocal() #creamos una sesion de base de datos .
     try:
         yield db
     finally:
