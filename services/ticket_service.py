@@ -19,8 +19,13 @@ class TicketService:
         return self.ticket_repository.save(db_ticket=db_ticket)
 
     def get_tickets(self):
-        tickets = self.ticket_repository.find_all()
-        return tickets
+        return self.ticket_repository.find_all()
+
+    def get_tickets_by_product_id(self, product_id: int):
+        db_ticket: Ticket = self.ticket_repository.find_by_id_product(product_id=product_id)
+        if db_ticket is None or len(list(db_ticket)) == 0: ## si la lista es nula entonces devolvemos tickets no found.
+            raise HTTPException(status_code=404, detail="ticket associated with product id not found")
+        return db_ticket
 
     def delete_ticket(self, ticket_id: int):
         db_ticket: Ticket = self.ticket_repository.find_by_id(ticket_id=ticket_id)

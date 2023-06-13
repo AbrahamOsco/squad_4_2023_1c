@@ -30,3 +30,9 @@ def delete_ticket(ticket_id: int, db: Session = Depends(get_db)):
 def update_ticket(ticket_id: int, ticket: TicketCreate, db: Session = Depends(get_db)):
     ticket_service: TicketService = TicketService(db)
     return ticket_service.update_ticket(ticket_id=ticket_id, ticket=ticket)
+
+
+@router.get("/tickets/{product_id}", response_model=list[Ticket])
+def get_tickets(product_id: int, db: Session = Depends(get_db)):
+    ticket_service: TicketService = TicketService(db)
+    return ticket_service.get_tickets_by_product_id(product_id)
