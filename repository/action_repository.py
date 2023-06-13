@@ -15,3 +15,6 @@ class ActionRepository:
 
     def find_all(self):
         return self.db.query(Action).all()
+
+    def find_by_ticket(self, ticket_id: int):
+        return self.db.query(Action).filter(Action.ticket_id == ticket_id).all()

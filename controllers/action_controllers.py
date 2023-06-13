@@ -18,3 +18,9 @@ def create_action(ticket_id: int, resource_id: int, action: ActionCreate, db: Se
 def get_actions(db: Session = Depends(get_db)):
     action_service: ActionService = ActionService(db)
     return action_service.get_actions()
+
+
+@router.get("/actions/{ticket_id}", response_model=list[Action])
+def get_actions(ticket_id: int, db: Session = Depends(get_db)):
+    action_service: ActionService = ActionService(db)
+    return action_service.get_actions_for_ticket(ticket_id=ticket_id)

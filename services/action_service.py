@@ -16,3 +16,7 @@ class ActionService:
     def get_actions(self):
         actions = self.action_repository.find_all()
         return actions
+
+    def get_actions_for_ticket(self, ticket_id: int):
+        actions = self.action_repository.find_by_ticket(ticket_id=ticket_id)
+        return actions
