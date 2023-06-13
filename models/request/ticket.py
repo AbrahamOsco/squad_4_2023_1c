@@ -1,5 +1,7 @@
 from pydantic import BaseModel
 
+from models.request.action import Action
+
 
 class TicketBase(BaseModel):
     title: str
@@ -20,6 +22,7 @@ class Ticket(TicketBase):
     id: int
     product_id: int
     client_id: int
+    actions: list[Action] = []
 
     class Config:
         orm_mode = True

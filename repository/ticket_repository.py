@@ -24,6 +24,6 @@ class TicketRepository:
     def find_by_id(self, ticket_id: int):
         return self.db.query(Ticket).get(ticket_id)
 
-    def find_by_id_product(self, product_id : int):
+    def find_by_id_product(self, product_id: int):
         return self.db.query(Ticket).filter(Ticket.product_id == product_id).all()
 
