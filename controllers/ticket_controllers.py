@@ -9,9 +9,10 @@ router = APIRouter()
 
 
 @router.post("/ticket/product/{product_id}/client/{client_id}", response_model=Ticket)
-def create_ticket(product_id: int, client_id: int, ticket: TicketCreate, db: Session = Depends(get_db)):
+def create_ticket(product_id: int, client_id: int, current_responsible_id: int, ticket: TicketCreate, db: Session = Depends(get_db)):
     ticket_service: TicketService = TicketService(db)
-    return ticket_service.create_ticket(product_id=product_id, client_id=client_id, ticket=ticket)
+    return ticket_service.create_ticket(product_id=product_id, client_id=client_id,
+                                        current_responsible_id=current_responsible_id, ticket=ticket)
 
 
 @router.get("/tickets", response_model=list[Ticket])

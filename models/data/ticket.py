@@ -11,6 +11,7 @@ class Ticket(Base):
     product_id = Column(Integer)
     client_id = Column(Integer)
     #attributes
+    current_responsible_id = Column(Integer)
     title = Column(String)
     description = Column(String)
     severity = Column(String)

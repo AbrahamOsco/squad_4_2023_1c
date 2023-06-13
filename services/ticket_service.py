@@ -10,8 +10,9 @@ class TicketService:
     def __init__(self, db: Session):
         self.ticket_repository: TicketRepository = TicketRepository(db)
 
-    def create_ticket(self, product_id: int, client_id: int, ticket: TicketCreate):
-        db_ticket: Ticket = Ticket(product_id=product_id, client_id=client_id, title=ticket.title,
+    def create_ticket(self, product_id: int, client_id: int, current_responsible_id :int, ticket: TicketCreate):
+        db_ticket: Ticket = Ticket(product_id=product_id, client_id=client_id,
+                                   current_responsible_id=current_responsible_id, title=ticket.title,
                                    description=ticket.description, severity=ticket.severity,
                                    priority=ticket.priority, state=ticket.state,
                                    timeStart=ticket.timeStart, supportLevel=ticket.supportLevel,
@@ -38,6 +39,7 @@ class TicketService:
         if db_ticket is None:
             raise HTTPException(status_code=404, detail="Ticket not found")
         db_ticket.title = ticket.title
+        db_ticket.current_responsible_id = ticket.current_responsible_id
         db_ticket.description = ticket.description
         db_ticket.severity = ticket.severity
         db_ticket.priority = ticket.priority
