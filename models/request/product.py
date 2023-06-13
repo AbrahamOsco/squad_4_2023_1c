@@ -12,3 +12,6 @@ class ProductCreate(ProductBase):
 
 class Product(ProductBase):
     id: int
+
+    class Config:
+        orn_mode = True
