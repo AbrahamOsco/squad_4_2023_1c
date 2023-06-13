@@ -19,7 +19,14 @@ def get_tickets(db: Session = Depends(get_db)):
     ticket_service: TicketService = TicketService(db)
     return ticket_service.get_tickets()
 
+
 @router.delete("/tickets/{ticket_id}")
 def delete_ticket(ticket_id: int, db: Session = Depends(get_db)):
     ticket_service: TicketService = TicketService(db)
     return ticket_service.delete_ticket(ticket_id=ticket_id)
+
+
+@router.put("/tickets/{ticket_id}")
+def update_ticket(ticket_id: int, ticket: TicketCreate, db: Session = Depends(get_db)):
+    ticket_service: TicketService = TicketService(db)
+    return ticket_service.update_ticket(ticket_id=ticket_id, ticket=ticket)

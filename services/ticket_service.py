@@ -1,3 +1,4 @@
+from fastapi import HTTPException
 from requests import Session
 
 from models.data.ticket import Ticket
@@ -19,3 +20,10 @@ class TicketService:
 
     def delete_ticket(self, ticket_id: int):
         return self.ticket_repository.delete(ticket_id)
+
+    def update_ticket(self, ticket_id: int, ticket: TicketCreate):
+        db_ticket: Ticket = self.ticket_repository.find_by_id(ticket_id=ticket_id)
+        if db_ticket is None:
+            raise HTTPException(status_code=404, detail="Account not found")
+        db_ticket.title = ticket.title
+        return self.ticket_repository.save(db_ticket=db_ticket)
