@@ -3,6 +3,13 @@ from pydantic import BaseModel
 
 class TicketBase(BaseModel):
     title: str
+    description: str
+    severity: str
+    priority: str
+    state: str
+    timeStart: str
+    supportLevel: str
+    accumulatedTime: str
 
 
 class TicketCreate(TicketBase):
