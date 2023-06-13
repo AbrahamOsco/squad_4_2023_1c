@@ -11,7 +11,11 @@ class TicketService:
         self.ticket_repository: TicketRepository = TicketRepository(db)
 
     def create_ticket(self, product_id: int, client_id: int, ticket: TicketCreate):
-        db_ticket: Ticket = Ticket(product_id=product_id, client_id=client_id, title=ticket.title)
+        db_ticket: Ticket = Ticket(product_id=product_id, client_id=client_id, title=ticket.title,
+                                   description=ticket.description, severity=ticket.severity,
+                                   priority=ticket.priority, state=ticket.state,
+                                   timeStart=ticket.timeStart, supportLevel=ticket.supportLevel,
+                                   accumulatedTime=ticket.accumulatedTime)
         return self.ticket_repository.save(db_ticket=db_ticket)
 
     def get_tickets(self):
@@ -29,4 +33,11 @@ class TicketService:
         if db_ticket is None:
             raise HTTPException(status_code=404, detail="Ticket not found")
         db_ticket.title = ticket.title
+        db_ticket.description = ticket.description
+        db_ticket.severity = ticket.severity
+        db_ticket.priority = ticket.priority
+        db_ticket.state = ticket.state
+        db_ticket.timeStart = ticket.timeStart
+        db_ticket.supportLevel = ticket.supportLevel
+        db_ticket.accumulatedTime = ticket.accumulatedTime
         return self.ticket_repository.save(db_ticket=db_ticket)
