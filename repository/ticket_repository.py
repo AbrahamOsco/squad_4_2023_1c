@@ -15,3 +15,8 @@ class TicketRepository:
 
     def find_all(self):
         return self.db.query(Ticket).all()
+
+    def delete(self, ticket_id: int):
+        self.db.query(Ticket).filter(Ticket.id == ticket_id).delete()
+        self.db.commit()
+        return {"message": "Ticket deleted"}

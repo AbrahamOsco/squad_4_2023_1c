@@ -16,3 +16,6 @@ class TicketService:
     def get_tickets(self):
         tickets = self.ticket_repository.find_all()
         return tickets
+
+    def delete_ticket(self, ticket_id: int):
+        return self.ticket_repository.delete(ticket_id)
