@@ -12,3 +12,6 @@ class ActionRepository:
         self.db.commit()
         self.db.refresh(db_action)
         return db_action
+
+    def find_all(self):
+        return self.db.query(Action).all()

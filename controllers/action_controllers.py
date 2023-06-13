@@ -12,3 +12,9 @@ router = APIRouter()
 def create_action(ticket_id: int, resource_id: int, action: ActionCreate, db: Session = Depends(get_db)):
     action_service: ActionService = ActionService(db)
     return action_service.create_action(ticket_id=ticket_id, resource_id=resource_id, action=action)
+
+
+@router.get("/actions", response_model=list[Action])
+def get_actions(db: Session = Depends(get_db)):
+    action_service: ActionService = ActionService(db)
+    return action_service.get_actions()
