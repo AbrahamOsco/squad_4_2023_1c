@@ -10,9 +10,9 @@ class TicketService:
     def __init__(self, db: Session):
         self.ticket_repository: TicketRepository = TicketRepository(db)
 
-    def create_ticket(self, product_id: int, client_id: int, current_responsible_id :int, ticket: TicketCreate):
+    def create_ticket(self, product_id: int, client_id: int, responsible_id: int, ticket: TicketCreate):
         db_ticket: Ticket = Ticket(product_id=product_id, client_id=client_id,
-                                   current_responsible_id=current_responsible_id, title=ticket.title,
+                                   responsible_id=responsible_id, title=ticket.title,
                                    description=ticket.description, severity=ticket.severity,
                                    priority=ticket.priority, state=ticket.state,
                                    timeStart=ticket.timeStart, supportLevel=ticket.supportLevel,

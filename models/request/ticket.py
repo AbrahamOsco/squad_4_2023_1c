@@ -4,7 +4,6 @@ from models.request.action import Action
 
 
 class TicketBase(BaseModel):
-    current_responsible_id: int
     title: str
     description: str
     severity: str
@@ -23,6 +22,7 @@ class Ticket(TicketBase):
     id: int
     product_id: int
     client_id: int
+    responsible_id: int
     actions: list[Action] = []
 
     class Config:
