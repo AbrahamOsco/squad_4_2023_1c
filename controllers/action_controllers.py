@@ -9,9 +9,9 @@ router = APIRouter()
 
 
 @router.post("/action/ticket/{ticket_id}/resource/{resource_id}", response_model=Action)
-def create_action(ticket_id: int, resource_id: int, action: ActionCreate, db: Session = Depends(get_db)):
+def create_action(ticket_id: int, resource_id: int, amount_hours: int, action: ActionCreate, db: Session = Depends(get_db)):
     action_service: ActionService = ActionService(db)
-    return action_service.create_action(ticket_id=ticket_id, resource_id=resource_id, action=action)
+    return action_service.create_action(ticket_id=ticket_id, resource_id=resource_id, amount_hours=amount_hours, action=action)
 
 
 @router.get("/actions", response_model=list[Action])

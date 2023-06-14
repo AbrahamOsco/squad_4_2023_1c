@@ -11,5 +11,8 @@ class Action(Base):
     ticket_id = Column(Integer, ForeignKey("tickets.id"))
     resource_id = Column(Integer)
     description = Column(String)
+    time_start = Column(String)
+    time_end = Column(String)
+    amount_hours = Column(Integer)
 
     owner = relationship("Ticket", back_populates="actions")
