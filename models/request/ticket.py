@@ -13,6 +13,7 @@ class TicketBase(BaseModel):
     supportLevel: str
     accumulatedTime: str
     type: str
+    supportTime: str
 
 
 class TicketCreate(TicketBase):

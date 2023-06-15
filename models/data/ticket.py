@@ -21,6 +21,7 @@ class Ticket(Base):
     supportLevel = Column(String)
     accumulatedTime = Column(String)
     type = Column(String)
+    supportTime = Column(String)
 
     actions = relationship("Action", back_populates="owner")
 
