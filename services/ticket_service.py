@@ -11,12 +11,13 @@ class TicketService:
         self.ticket_repository: TicketRepository = TicketRepository(db)
 
     def create_ticket(self, product_id: int, client_id: int, responsible_id: int, ticket: TicketCreate):
-        db_ticket: Ticket = Ticket(product_id=product_id, client_id=client_id,
-                                   responsible_id=responsible_id, title=ticket.title,
-                                   description=ticket.description, severity=ticket.severity,
-                                   priority=ticket.priority, state=ticket.state,
-                                   timeStart=ticket.timeStart, supportLevel=ticket.supportLevel,
-                                   accumulatedTime=ticket.accumulatedTime)
+        ticket_data = ticket.dict()
+        ticket_data.update({
+            "product_id": product_id,
+            "client_id": client_id,
+            "responsible_id": responsible_id
+        })
+        db_ticket = Ticket(**ticket_data)
         return self.ticket_repository.save(db_ticket=db_ticket)
 
     def get_tickets(self):
@@ -24,7 +25,7 @@ class TicketService:
 
     def get_tickets_by_product_id(self, product_id: int):
         db_ticket: Ticket = self.ticket_repository.find_by_id_product(product_id=product_id)
-        if db_ticket is None or len(list(db_ticket)) == 0: ## si la lista es nula entonces devolvemos tickets no found.
+        if db_ticket is None or len(list(db_ticket)) == 0:
             raise HTTPException(status_code=404, detail="ticket associated with product id not found")
         return db_ticket
 
@@ -39,7 +40,6 @@ class TicketService:
         if db_ticket is None:
             raise HTTPException(status_code=404, detail="Ticket not found")
         db_ticket.title = ticket.title
-        db_ticket.current_responsible_id = ticket.current_responsible_id
         db_ticket.description = ticket.description
         db_ticket.severity = ticket.severity
         db_ticket.priority = ticket.priority
