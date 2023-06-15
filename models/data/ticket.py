@@ -10,7 +10,7 @@ class Ticket(Base):
     id = Column(Integer, primary_key=True, index=True)
     product_id = Column(Integer)
     client_id = Column(Integer)
-    #attributes
+
     responsible_id = Column(Integer)
     title = Column(String)
     description = Column(String)
@@ -20,6 +20,7 @@ class Ticket(Base):
     timeStart = Column(String)
     supportLevel = Column(String)
     accumulatedTime = Column(String)
+    type = Column(String)
 
     actions = relationship("Action", back_populates="owner")
 

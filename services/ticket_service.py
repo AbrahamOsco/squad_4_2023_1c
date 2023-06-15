@@ -47,4 +47,5 @@ class TicketService:
         db_ticket.timeStart = ticket.timeStart
         db_ticket.supportLevel = ticket.supportLevel
         db_ticket.accumulatedTime = ticket.accumulatedTime
+        db_ticket.type = ticket.type
         return self.ticket_repository.save(db_ticket=db_ticket)
