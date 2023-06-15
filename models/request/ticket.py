@@ -16,6 +16,10 @@ class TicketBase(BaseModel):
     supportTime: str
 
 
+class TicketUpdateSupport(BaseModel):
+    supportLevel: str
+
+
 class TicketCreate(TicketBase):
     pass
 
