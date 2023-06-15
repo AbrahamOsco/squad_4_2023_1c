@@ -2,7 +2,7 @@ from fastapi import HTTPException
 from requests import Session
 
 from models.data.ticket import Ticket
-from models.request.ticket import TicketCreate, TicketUpdateSupport
+from models.request.ticket import TicketCreate, TicketUpdateSupport, TicketUpdateTime
 from repository.ticket_repository import TicketRepository
 
 
@@ -56,4 +56,11 @@ class TicketService:
         if db_ticket is None:
             raise HTTPException(status_code=404, detail="Ticket not found")
         db_ticket.supportLevel = ticket.supportLevel
+        return self.ticket_repository.save(db_ticket=db_ticket)
+
+    def update_accumulated_time(self, ticket_id: int, ticket: TicketUpdateTime):
+        db_ticket: Ticket = self.ticket_repository.find_by_id(ticket_id=ticket_id)
+        if db_ticket is None:
+            raise HTTPException(status_code=404, detail="Ticket not found")
+        db_ticket.accumulatedTime = ticket.accumulatedTime
         return self.ticket_repository.save(db_ticket=db_ticket)

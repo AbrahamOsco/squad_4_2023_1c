@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends
 from requests import Session
 
 from database.connection import get_db
-from models.request.ticket import Ticket, TicketCreate, TicketUpdateSupport
+from models.request.ticket import Ticket, TicketCreate, TicketUpdateSupport, TicketUpdateTime
 from services.ticket_service import TicketService
 
 router = APIRouter()
@@ -33,10 +33,17 @@ def update_ticket(ticket_id: int, ticket: TicketCreate, db: Session = Depends(ge
     ticket_service: TicketService = TicketService(db)
     return ticket_service.update_ticket(ticket_id=ticket_id, ticket=ticket)
 
+
 @router.put("/tickets/{ticket_id}/support", response_model=Ticket)
 def update_support_level(ticket_id: int, ticket: TicketUpdateSupport, db: Session = Depends(get_db)):
     ticket_service: TicketService = TicketService(db)
     return ticket_service.update_support_level(ticket_id=ticket_id, ticket=ticket)
+
+
+@router.put("/tickets/{ticket_id}/time", response_model=Ticket)
+def update_accumulated_time(ticket_id: int, ticket: TicketUpdateTime, db: Session = Depends(get_db)):
+    ticket_service: TicketService = TicketService(db)
+    return ticket_service.update_accumulated_time(ticket_id=ticket_id, ticket=ticket)
 
 
 @router.get("/tickets/{product_id}", response_model=list[Ticket])

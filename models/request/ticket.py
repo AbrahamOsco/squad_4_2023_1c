@@ -20,6 +20,10 @@ class TicketUpdateSupport(BaseModel):
     supportLevel: str
 
 
+class TicketUpdateTime(BaseModel):
+    accumulatedTime: str
+
+
 class TicketCreate(TicketBase):
     pass
 
