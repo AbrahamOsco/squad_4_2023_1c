@@ -1,9 +1,9 @@
 from fastapi import HTTPException
 from requests import Session
 
-from models.data.ticket import Ticket
-from models.request.ticket import TicketCreate, TicketUpdateSupport, TicketUpdateTime
-from repository.ticket_repository import TicketRepository
+from app.models.data.ticket import Ticket
+from app.models.request.ticket import TicketCreate, TicketUpdateSupport, TicketUpdateTime
+from app.repository.ticket_repository import TicketRepository
 
 
 class TicketService:

@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 
-from models.request.action import Action
+from app.models.request.action import Action
 
 
 class TicketBase(BaseModel):

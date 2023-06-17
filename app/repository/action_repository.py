@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
 
-from models.data.action import Action
+from app.models.data.action import Action
 
 
 class ActionRepository:

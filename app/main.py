@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 
-from database.connection import engine, Base
-from controllers import product_controllers, client_controllers, ticket_controllers, action_controllers
+from app.controllers import product_controllers, client_controllers, ticket_controllers, action_controllers
+from app.database.connection import Base, engine
 
 Base.metadata.create_all(bind=engine)
 

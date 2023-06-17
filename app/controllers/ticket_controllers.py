@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends
 from requests import Session
 
-from database.connection import get_db
-from models.request.ticket import Ticket, TicketCreate, TicketUpdateSupport, TicketUpdateTime
-from services.ticket_service import TicketService
+from app.database.connection import get_db
+from app.models.request.ticket import Ticket, TicketCreate, TicketUpdateSupport, TicketUpdateTime
+from app.services.ticket_service import TicketService
 
 router = APIRouter()
 

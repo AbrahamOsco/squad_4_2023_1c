@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
 
-from models.data.ticket import Ticket
+from app.models.data.ticket import Ticket
 
 
 class TicketRepository:

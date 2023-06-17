@@ -1,8 +1,8 @@
 from sqlalchemy.orm import Session
 
-from models.data.action import Action
-from models.request.action import ActionCreate
-from repository.action_repository import ActionRepository
+from app.models.data.action import Action
+from app.models.request.action import ActionCreate
+from app.repository.action_repository import ActionRepository
 
 
 class ActionService:
