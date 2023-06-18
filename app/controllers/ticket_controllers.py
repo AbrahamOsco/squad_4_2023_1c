@@ -34,18 +34,6 @@ def update_ticket(ticket_id: int, ticket: TicketCreate, db: Session = Depends(ge
     return ticket_service.update_ticket(ticket_id=ticket_id, ticket=ticket)
 
 
-@router.put("/tickets/{ticket_id}/support", response_model=Ticket)
-def update_support_level(ticket_id: int, ticket: TicketUpdateSupport, db: Session = Depends(get_db)):
-    ticket_service: TicketService = TicketService(db)
-    return ticket_service.update_support_level(ticket_id=ticket_id, ticket=ticket)
-
-
-@router.put("/tickets/{ticket_id}/time", response_model=Ticket)
-def update_accumulated_time(ticket_id: int, ticket: TicketUpdateTime, db: Session = Depends(get_db)):
-    ticket_service: TicketService = TicketService(db)
-    return ticket_service.update_accumulated_time(ticket_id=ticket_id, ticket=ticket)
-
-
 @router.get("/tickets/{product_id}", response_model=list[Ticket])
 def get_tickets(product_id: int, db: Session = Depends(get_db)):
     ticket_service: TicketService = TicketService(db)

@@ -18,8 +18,6 @@ class Ticket(Base):
     priority = Column(String)
     state = Column(String)
     timeStart = Column(String)
-    supportLevel = Column(String)
-    accumulatedTime = Column(String)
     type = Column(String)
     supportTime = Column(String)
 

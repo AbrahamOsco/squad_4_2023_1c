@@ -10,8 +10,6 @@ class TicketBase(BaseModel):
     priority: str
     state: str
     timeStart: str
-    supportLevel: str
-    accumulatedTime: str
     type: str
     supportTime: str
 

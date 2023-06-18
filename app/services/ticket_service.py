@@ -45,22 +45,6 @@ class TicketService:
         db_ticket.priority = ticket.priority
         db_ticket.state = ticket.state
         db_ticket.timeStart = ticket.timeStart
-        db_ticket.supportLevel = ticket.supportLevel
-        db_ticket.accumulatedTime = ticket.accumulatedTime
         db_ticket.type = ticket.type
         db_ticket.supportTime = ticket.supportTime
-        return self.ticket_repository.save(db_ticket=db_ticket)
-
-    def update_support_level(self, ticket_id: int, ticket: TicketUpdateSupport):
-        db_ticket: Ticket = self.ticket_repository.find_by_id(ticket_id=ticket_id)
-        if db_ticket is None:
-            raise HTTPException(status_code=404, detail="Ticket not found")
-        db_ticket.supportLevel = ticket.supportLevel
-        return self.ticket_repository.save(db_ticket=db_ticket)
-
-    def update_accumulated_time(self, ticket_id: int, ticket: TicketUpdateTime):
-        db_ticket: Ticket = self.ticket_repository.find_by_id(ticket_id=ticket_id)
-        if db_ticket is None:
-            raise HTTPException(status_code=404, detail="Ticket not found")
-        db_ticket.accumulatedTime = ticket.accumulatedTime
         return self.ticket_repository.save(db_ticket=db_ticket)
