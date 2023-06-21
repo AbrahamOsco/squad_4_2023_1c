@@ -21,8 +21,6 @@ class Ticket(Base):
     type = Column(String)
     supportTime = Column(String)
 
-    actions = relationship("Action", back_populates="owner")
-
 
 
 
