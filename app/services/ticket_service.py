@@ -48,3 +48,9 @@ class TicketService:
         db_ticket.type = ticket.type
         db_ticket.supportTime = ticket.supportTime
         return self.ticket_repository.save(db_ticket=db_ticket)
+
+    def get_ticket(self, ticket_id: int):
+        db_ticket: Ticket = self.ticket_repository.find_by_id(ticket_id=ticket_id)
+        if db_ticket is None:
+            raise HTTPException(status_code=404, detail="Ticket not found")
+        return db_ticket

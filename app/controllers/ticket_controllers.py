@@ -38,3 +38,9 @@ def update_ticket(ticket_id: int, ticket: TicketCreate, db: Session = Depends(ge
 def get_tickets(product_id: int, db: Session = Depends(get_db)):
     ticket_service: TicketService = TicketService(db)
     return ticket_service.get_tickets_by_product_id(product_id)
+
+
+@router.get("/ticket/{ticket_id}", response_model=Ticket)
+def get_ticket(ticket_id: int, db: Session = Depends(get_db)):
+    ticket_service: TicketService = TicketService(db)
+    return ticket_service.get_ticket(ticket_id=ticket_id)
