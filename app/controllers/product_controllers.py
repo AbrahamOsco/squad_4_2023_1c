@@ -15,3 +15,11 @@ products = [
 @router.get("/products", response_model=list[Product])
 def get_products():
     return products
+
+
+@router.get("/product/{id}", response_model=Product)
+def get_product(product_id: int):
+    for product in products:
+        if product.id == product_id:
+            return product
+    return {"message": "Product not found"}
