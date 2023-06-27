@@ -17,7 +17,7 @@ def get_products():
     return products
 
 
-@router.get("/product/{id}", response_model=Product)
+@router.get("/product/{product_id}", response_model=Product)
 def get_product(product_id: int):
     for product in products:
         if product.id == product_id:
