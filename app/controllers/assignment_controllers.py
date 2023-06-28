@@ -25,3 +25,8 @@ def get_assignments_by_ticket_id(ticket_id: int, db: Session = Depends(get_db)):
     assignment_service: AssignmentService = AssignmentService(db)
     return assignment_service.get_assignments_by_ticket_id(ticket_id=ticket_id)
 
+
+@router.get("/assignments/task/{task_id}", response_model=list[Assignment])
+def get_assignments_by_task_id(task_id: int, db: Session = Depends(get_db)):
+    assignment_service: AssignmentService = AssignmentService(db)
+    return assignment_service.get_assignments_by_task_id(task_id=task_id)
