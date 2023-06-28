@@ -1,5 +1,4 @@
 from sqlalchemy import Column, Integer, String
-from sqlalchemy.orm import relationship
 
 from app.database.connection import Base
 
@@ -9,6 +8,7 @@ class Ticket(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     product_id = Column(Integer)
+    project_id = Column(Integer, nullable=True)
     client_id = Column(Integer)
 
     responsible_id = Column(Integer)

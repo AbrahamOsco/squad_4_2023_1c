@@ -1,3 +1,5 @@
+from typing import Optional
+
 from pydantic import BaseModel
 
 
@@ -10,14 +12,7 @@ class TicketBase(BaseModel):
     timeStart: str
     type: str
     supportTime: str
-
-
-class TicketUpdateSupport(BaseModel):
-    supportLevel: str
-
-
-class TicketUpdateTime(BaseModel):
-    accumulatedTime: str
+    project_id: Optional[int]
 
 
 class TicketCreate(TicketBase):

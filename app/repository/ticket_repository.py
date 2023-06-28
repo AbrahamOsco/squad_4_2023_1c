@@ -27,3 +27,6 @@ class TicketRepository:
     def find_by_id_product(self, product_id: int):
         return self.db.query(Ticket).filter(Ticket.product_id == product_id).all()
 
+    def find_by_id_project(self, project_id: int):
+        return self.db.query(Ticket).filter(Ticket.project_id == project_id).all()
+
