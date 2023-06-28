@@ -16,3 +16,7 @@ class AssignmentService:
     def get_assignments(self):
         assignments = self.assignment_repository.find_all()
         return assignments
+
+    def get_assignments_by_ticket_id(self, ticket_id: int):
+        assignments = self.assignment_repository.find_by_ticket(ticket_id=ticket_id)
+        return assignments
