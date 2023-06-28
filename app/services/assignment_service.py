@@ -12,3 +12,7 @@ class AssignmentService:
     def create_assignment(self, ticket_id: int, assignment: AssignmentCreate):
         db_assignment: Assignment = Assignment(ticket_id=ticket_id, task_id=assignment.task_id)
         return self.assignment_repository.save(db_assignment=db_assignment)
+
+    def get_assignments(self):
+        assignments = self.assignment_repository.find_all()
+        return assignments

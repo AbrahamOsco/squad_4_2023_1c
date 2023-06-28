@@ -12,3 +12,6 @@ class AssignmentRepository:
         self.db.commit()
         self.db.refresh(db_assignment)
         return db_assignment
+
+    def find_all(self):
+        return self.db.query(Assignment).all()
