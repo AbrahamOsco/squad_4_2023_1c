@@ -2,6 +2,8 @@ from typing import Optional
 
 from pydantic import BaseModel
 
+from app.models.request.assignment import Assignment
+
 
 class TicketBase(BaseModel):
     title: str
@@ -24,6 +26,7 @@ class Ticket(TicketBase):
     product_id: int
     client_id: int
     responsible_id: int
+    assignments: list[Assignment] = []
 
     class Config:
         orm_mode = True

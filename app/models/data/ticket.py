@@ -1,4 +1,5 @@
 from sqlalchemy import Column, Integer, String
+from sqlalchemy.orm import relationship
 
 from app.database.connection import Base
 
@@ -21,7 +22,7 @@ class Ticket(Base):
     type = Column(String)
     supportTime = Column(String)
 
-
+    assignments = relationship("Assignment", back_populates="owner")
 
 
 
