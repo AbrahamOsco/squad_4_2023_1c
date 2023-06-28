@@ -26,7 +26,6 @@ class Ticket(TicketBase):
     product_id: int
     client_id: int
     responsible_id: int
-    assignments: list[Assignment] = []
 
     class Config:
         orm_mode = True
