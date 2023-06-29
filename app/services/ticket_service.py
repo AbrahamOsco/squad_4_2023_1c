@@ -16,7 +16,6 @@ class TicketService:
             "product_id": product_id,
             "client_id": client_id,
             "responsible_id": responsible_id,
-            "project_id": None
         })
         db_ticket = Ticket(**ticket_data)
         return self.ticket_repository.save(db_ticket=db_ticket)
@@ -48,17 +47,10 @@ class TicketService:
         db_ticket.timeStart = ticket.timeStart
         db_ticket.type = ticket.type
         db_ticket.supportTime = ticket.supportTime
-        db_ticket.project_id = ticket.project_id
         return self.ticket_repository.save(db_ticket=db_ticket)
 
     def get_ticket(self, ticket_id: int):
         db_ticket: Ticket = self.ticket_repository.find_by_id(ticket_id=ticket_id)
         if db_ticket is None:
             raise HTTPException(status_code=404, detail="Ticket not found")
-        return db_ticket
-
-    def get_tickets_by_project_id(self, project_id: int):
-        db_ticket: Ticket = self.ticket_repository.find_by_id_project(project_id=project_id)
-        if db_ticket is None or len(list(db_ticket)) == 0:
-            raise HTTPException(status_code=404, detail="ticket associated with project id not found")
         return db_ticket

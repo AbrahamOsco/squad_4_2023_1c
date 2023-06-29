@@ -44,9 +44,3 @@ def get_tickets(product_id: int, db: Session = Depends(get_db)):
 def get_ticket(ticket_id: int, db: Session = Depends(get_db)):
     ticket_service: TicketService = TicketService(db)
     return ticket_service.get_ticket(ticket_id=ticket_id)
-
-
-@router.get("/tickets/project/{project_id}", response_model=list[Ticket])
-def get_tickets(project_id: int, db: Session = Depends(get_db)):
-    ticket_service: TicketService = TicketService(db)
-    return ticket_service.get_tickets_by_project_id(project_id)

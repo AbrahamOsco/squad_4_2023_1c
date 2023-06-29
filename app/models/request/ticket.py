@@ -14,7 +14,6 @@ class TicketBase(BaseModel):
     timeStart: str
     type: str
     supportTime: str
-    project_id: Optional[int]
 
 
 class TicketCreate(TicketBase):
