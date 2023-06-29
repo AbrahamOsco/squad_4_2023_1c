@@ -3,6 +3,7 @@ from pydantic import BaseModel
 
 class AssignmentBase(BaseModel):
     task_id: int
+    project_id: int
 
 
 class AssignmentCreate(AssignmentBase):

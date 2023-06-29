@@ -10,5 +10,6 @@ class Assignment(Base):
     id = Column(Integer, primary_key=True, index=True)
     ticket_id = Column(Integer, ForeignKey("tickets.id"))
     task_id = Column(Integer)
+    project_id = Column(Integer)
 
     owner = relationship("Ticket", back_populates="assignments")
