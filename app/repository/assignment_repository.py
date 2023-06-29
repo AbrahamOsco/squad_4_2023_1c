@@ -21,3 +21,11 @@ class AssignmentRepository:
 
     def find_by_task(self, task_id: int):
         return self.db.query(Assignment).filter(Assignment.task_id == task_id).all()
+
+    def find_by_id(self, assignment_id):
+        return self.db.query(Assignment).get(assignment_id)
+
+    def delete(self, db_assignment):
+        self.db.delete(db_assignment)
+        self.db.commit()
+        return {"message": "Assignment deleted"}

@@ -1,3 +1,4 @@
+from fastapi import HTTPException
 from sqlalchemy.orm import Session
 
 from app.models.data.assignment import Assignment
@@ -25,3 +26,9 @@ class AssignmentService:
     def get_assignments_by_task_id(self, task_id):
         assignments = self.assignment_repository.find_by_task(task_id=task_id)
         return assignments
+
+    def delete_assignment(self, assignment_id: int):
+        db_assignment: Assignment = self.assignment_repository.find_by_id(assignment_id=assignment_id)
+        if db_assignment is None:
+            raise HTTPException(status_code=404, detail="Assignment not found")
+        return self.assignment_repository.delete(db_assignment)

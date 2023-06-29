@@ -30,3 +30,9 @@ def get_assignments_by_ticket_id(ticket_id: int, db: Session = Depends(get_db)):
 def get_assignments_by_task_id(task_id: int, db: Session = Depends(get_db)):
     assignment_service: AssignmentService = AssignmentService(db)
     return assignment_service.get_assignments_by_task_id(task_id=task_id)
+
+
+@router.delete("/assignment/{assignment_id}")
+def delete_assignment(assignment_id: int, db: Session = Depends(get_db)):
+    assignment_service: AssignmentService = AssignmentService(db)
+    return assignment_service.delete_assignment(assignment_id=assignment_id)
