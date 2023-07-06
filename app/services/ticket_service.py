@@ -14,13 +14,13 @@ class TicketService:
         support_time = 0
 
         if ticket.severity == "LS1":
-            support_time = 7
+            support_time = 1
         elif ticket.severity == "LS2":
-            support_time = 30
+            support_time = 7
         elif ticket.severity == "LS3":
-            support_time = 90
+            support_time = 30
         elif ticket.severity == "LS4":
-            support_time = 360
+            support_time = 90
 
         ticket_data = ticket.dict()
         ticket_data.update({
@@ -53,13 +53,13 @@ class TicketService:
         support_time = 0
 
         if ticket.severity == "LS1":
-            support_time = 7
+            support_time = 1
         elif ticket.severity == "LS2":
-            support_time = 30
+            support_time = 7
         elif ticket.severity == "LS3":
-            support_time = 90
+            support_time = 30
         elif ticket.severity == "LS4":
-            support_time = 360
+            support_time = 90
 
         if db_ticket is None:
             raise HTTPException(status_code=404, detail="Ticket not found")
