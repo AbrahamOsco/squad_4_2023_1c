@@ -19,7 +19,7 @@ class Ticket(Base):
     state = Column(String)
     timeStart = Column(String)
     type = Column(String)
-    supportTime = Column(String)
+    supportTime = Column(Integer)
 
     assignments = relationship("Assignment", back_populates="owner")
 

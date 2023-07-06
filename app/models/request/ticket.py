@@ -13,7 +13,7 @@ class TicketBase(BaseModel):
     state: str
     timeStart: str
     type: str
-    supportTime: str
+    supportTime: int
 
 
 class TicketCreate(TicketBase):
