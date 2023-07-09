@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends
 from requests import Session
 
 from app.database.connection import get_db
-from app.models.request.ticket import Ticket, TicketCreate
+from app.models.request.ticket import Ticket, TicketCreate, TicketUpdate
 from app.services.ticket_service import TicketService
 
 router = APIRouter()
@@ -29,7 +29,7 @@ def delete_ticket(ticket_id: int, db: Session = Depends(get_db)):
 
 
 @router.put("/tickets/{ticket_id}", response_model=Ticket)
-def update_ticket(ticket_id: int, ticket: TicketCreate, db: Session = Depends(get_db)):
+def update_ticket(ticket_id: int, ticket: TicketUpdate, db: Session = Depends(get_db)):
     ticket_service: TicketService = TicketService(db)
     return ticket_service.update_ticket(ticket_id=ticket_id, ticket=ticket)
 

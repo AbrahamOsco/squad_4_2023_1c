@@ -2,7 +2,7 @@ from fastapi import HTTPException
 from requests import Session
 
 from app.models.data.ticket import Ticket
-from app.models.request.ticket import TicketCreate
+from app.models.request.ticket import TicketCreate, TicketUpdate
 from app.repository.ticket_repository import TicketRepository
 
 
@@ -48,7 +48,7 @@ class TicketService:
             raise HTTPException(status_code=404, detail="Ticket not found")
         return self.ticket_repository.delete(db_ticket)
 
-    def update_ticket(self, ticket_id: int, ticket: TicketCreate):
+    def update_ticket(self, ticket_id: int, ticket: TicketUpdate):
         db_ticket: Ticket = self.ticket_repository.find_by_id(ticket_id=ticket_id)
         support_time = 0
 
@@ -71,6 +71,8 @@ class TicketService:
         db_ticket.timeStart = ticket.timeStart
         db_ticket.type = ticket.type
         db_ticket.supportTime = support_time
+        db_ticket.client_id = ticket.client_id
+        db_ticket.responsible_id = ticket.responsible_id
         return self.ticket_repository.save(db_ticket=db_ticket)
 
     def get_ticket(self, ticket_id: int):

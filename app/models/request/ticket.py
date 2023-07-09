@@ -20,6 +20,11 @@ class TicketCreate(TicketBase):
     pass
 
 
+class TicketUpdate(TicketBase):
+    client_id: int
+    responsible_id: int
+
+
 class Ticket(TicketBase):
     id: int
     product_id: int
